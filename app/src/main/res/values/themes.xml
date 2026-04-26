@@ -1,0 +1,5 @@
+<resources>
+    <style name="Base.Theme.Cameratranslator" parent="Theme.Material3.DayNight.NoActionBar" />
+    <style name="Theme.Cameratranslator" parent="Base.Theme.Cameratranslator" />
+    <style name="SplashTheme" parent="Theme.Material3.DayNight.NoActionBar" />
+</resources>

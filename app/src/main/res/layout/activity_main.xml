@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0F">
+
+    <!-- ── Camera Preview ── -->
+    <androidx.camera.view.PreviewView
+        android:id="@+id/previewView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- ── Text-block hit-test overlay (transparent, same size as preview) ── -->
+    <com.example.cameratranslator.TextOverlayView
+        android:id="@+id/overlayView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <!-- ── Top gradient scrim so header is legible over any scene ── -->
+    <View
+        android:id="@+id/topScrim"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/top_scrim_gradient"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- ── Header bar ── -->
+    <LinearLayout
+        android:id="@+id/headerBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="48dp"
+        android:paddingHorizontal="20dp"
+        android:paddingBottom="14dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- App name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SnapTrans"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.02"
+            android:layout_marginBottom="14dp" />
+
+        <!-- Language row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/language_row_bg"
+            android:paddingHorizontal="4dp">
+
+            <Spinner
+                android:id="@+id/sourceLanguageSpinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:paddingHorizontal="12dp"
+                android:popupBackground="@drawable/spinner_popup_background" />
+
+            <TextView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:text="⇄"
+                android:gravity="center"
+                android:textColor="#CCFFFFFF"
+                android:textSize="15sp"
+                android:background="@drawable/arrow_badge_background" />
+
+            <Spinner
+                android:id="@+id/targetLanguageSpinner"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:paddingHorizontal="12dp"
+                android:popupBackground="@drawable/spinner_popup_background" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- ── "Tap text to translate" hint label ── -->
+    <TextView
+        android:id="@+id/tapHintLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tap any text to translate"
+        android:textColor="#BBFFFFFF"
+        android:textSize="12sp"
+        android:background="@drawable/hint_pill_bg"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="6dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerBar"
+        android:layout_marginTop="6dp" />
+
+    <!-- ── Hidden model status (kept for compatibility) ── -->
+    <TextView
+        android:id="@+id/modelStatusText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Downloading offline model…"
+        android:textColor="#FFCC44"
+        android:textSize="11sp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@id/tapHintLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── Bottom gradient scrim ── -->
+    <View
+        android:id="@+id/bottomScrim"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:background="@drawable/bottom_scrim_gradient"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- ── Freeze / Unfreeze button ── -->
+    <ImageButton
+        android:id="@+id/captureButton"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:src="@drawable/ic_camera"
+        android:tint="#FFFFFF"
+        android:background="@drawable/capture_button_bg"
+        android:padding="14dp"
+        android:contentDescription="Freeze / Unfreeze"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/resultCard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ── Result Card ── -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/resultCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="28dp"
+        android:visibility="gone"
+        app:cardBackgroundColor="#1AFFFFFF"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="18dp">
+
+            <!-- Detected header row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="5dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="DETECTED TEXT"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.14"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/sourceLanguageLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Spanish"
+                    android:textColor="#AAFFFFFF"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.06"
+                    android:background="@drawable/lang_badge_bg"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/detectedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:lineSpacingMultiplier="1.45"
+                android:textColor="#CCFFFFFF"
+                android:maxLines="4"
+                android:ellipsize="end" />
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#20FFFFFF"
+                android:layout_marginVertical="14dp" />
+
+            <!-- Translation header row -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TRANSLATION"
+                    android:textColor="#80FFFFFF"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.14"
+                    android:fontFamily="sans-serif-medium" />
+
+                <TextView
+                    android:id="@+id/targetLanguageLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="English"
+                    android:textColor="#6647CF"
+                    android:textSize="10sp"
+                    android:letterSpacing="0.06"
+                    android:background="@drawable/lang_badge_bg"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="3dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/translatedText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:lineSpacingMultiplier="1.4"
+                android:textColor="#FFFFFF"
+                android:fontFamily="sans-serif-medium" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- ── Processing pill ── -->
+    <LinearLayout
+        android:id="@+id/processingOverlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@drawable/processing_bg"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="12dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/captureButton"
+        android:layout_marginBottom="12dp">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:indeterminateTint="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/processingLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Translating..."
+            android:textColor="#CCFFFFFF"
+            android:textSize="13sp"
+            android:layout_marginStart="10dp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

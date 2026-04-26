@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Transparent center with glowing purple corner brackets.
+    Used as the background of the scanZone View.
+-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Transparent fill (shows camera through) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+        </shape>
+    </item>
+
+    <!-- Full rounded border, semi-transparent -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <stroke android:width="1dp" android:color="#446647CF" />
+            <corners android:radius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Top-left corner accent -->
+    <item android:top="0dp" android:left="0dp" android:right="270dp" android:bottom="150dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <stroke android:width="3dp" android:color="#CC6647CF" />
+            <corners android:topLeftRadius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Top-right corner accent -->
+    <item android:top="0dp" android:left="270dp" android:right="0dp" android:bottom="150dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <stroke android:width="3dp" android:color="#CC6647CF" />
+            <corners android:topRightRadius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Bottom-left corner accent -->
+    <item android:top="150dp" android:left="0dp" android:right="270dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <stroke android:width="3dp" android:color="#CC6647CF" />
+            <corners android:bottomLeftRadius="12dp" />
+        </shape>
+    </item>
+
+    <!-- Bottom-right corner accent -->
+    <item android:top="150dp" android:left="270dp" android:right="0dp" android:bottom="0dp">
+        <shape android:shape="rectangle">
+            <solid android:color="#00000000" />
+            <stroke android:width="3dp" android:color="#CC6647CF" />
+            <corners android:bottomRightRadius="12dp" />
+        </shape>
+    </item>
+
+</layer-list>

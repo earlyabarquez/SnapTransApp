@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="88dp"
+    android:height="88dp"
+    android:viewportWidth="88"
+    android:viewportHeight="88">
+    <!-- Background circle -->
+    <path
+        android:fillColor="#6647CF"
+        android:pathData="M44,0 C68.3,0 88,19.7 88,44 C88,68.3 68.3,88 44,88 C19.7,88 0,68.3 0,44 C0,19.7 19.7,0 44,0 Z" />
+    <!-- Camera body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M26,34 C24.3,34 23,35.3 23,37 L23,56 C23,57.7 24.3,59 26,59 L62,59 C63.7,59 65,57.7 65,56 L65,37 C65,35.3 63.7,34 62,34 L57,34 L55,30 L33,30 L31,34 Z" />
+    <!-- Lens -->
+    <path
+        android:fillColor="#6647CF"
+        android:pathData="M44,53 C47.9,53 51,49.9 51,46 C51,42.1 47.9,39 44,39 C40.1,39 37,42.1 37,46 C37,49.9 40.1,53 44,53 Z" />
+    <!-- Translate arrows overlay -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.5"
+        android:pathData="M38,44 L50,44 M47,41 L50,44 L47,47" />
+</vector>
